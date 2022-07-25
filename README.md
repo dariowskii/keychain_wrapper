@@ -4,7 +4,7 @@ A simple KeychainWrapper to get, set, remove any `Codable` object from Keychain!
 
 ## Examples
 
-You can retrieve a value in this way:
+You can `get` a value in this way:
 ```swift
 do {
     let myPassword = try KeychainWrapper.shared.get(forKey: "myPasswordKey", expecting: String.self)
@@ -13,7 +13,7 @@ do {
 }
 ```
 
-You can set a new value for a specific key in this way:
+You can `set` a new value for a specific key in this way:
 ```swift
 let myObject: Codable = MyObject()
 
@@ -24,7 +24,7 @@ do {
 }
 ```
 
-You can remove a value for a specific key in this way:
+You can `remove` a value for a specific key in this way:
 ```swift
 do {
     try KeychainWrapper.shared.remove(forKey: "myObjectKey")
