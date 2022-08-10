@@ -74,7 +74,7 @@ class KeychainWrapper {
      
      - Returns: The object if exist and if the decoding doesn't fail.
      */
-    func get<T: Codable>(forKey key: String, expecting: T.Type) -> T? {
+    func get<T: Codable>(forKey key: String, expecting: T.Type = T.self) -> T? {
         var result: T?
         do {
             result = try getThrowing(forKey: key, expecting: expecting)
@@ -140,4 +140,14 @@ class KeychainWrapper {
         }
     }
     
+    /**
+     Use this function to remove all the items from the Keychain.
+     */
+    func deleteAll() throws {
+        let dict = [kSecClass: kSecClassGenericPassword]
+        let status = SecItemDelete(dict as CFDictionary)
+        if status != errSecSuccess {
+            throw KeychainWrapperError.failed(status: status)
+        }
+    }
 }
