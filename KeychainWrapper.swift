@@ -38,7 +38,7 @@ class KeychainWrapper {
      
      - Returns: The object if exist and if the decoding doesn't fail.
      */
-    func get<T: Codable>(forKey key: String, expecting: T.Type) throws -> T? {
+    func getThrowing<T: Codable>(forKey key: String, expecting: T.Type) throws -> T? {
         guard !key.isEmpty else {
             throw KeychainWrapperError.invalidKey
         }
@@ -61,6 +61,24 @@ class KeychainWrapper {
         } catch {
             throw error
         }
+        
+        return result
+    }
+    
+    /**
+     Use this function to retrieve a `Codable` object from the Keychain without handling errors.
+     
+     - Parameters:
+        - key: The key for the object.
+        - expecting: The explicit `Type` of the object to retrieve to do automatic casting.
+     
+     - Returns: The object if exist and if the decoding doesn't fail.
+     */
+    func get<T: Codable>(forKey key: String, expecting: T.Type) -> T? {
+        var result: T?
+        do {
+            result = try getThrowing(forKey: key, expecting: expecting)
+        } catch {}
         
         return result
     }
@@ -123,4 +141,3 @@ class KeychainWrapper {
     }
     
 }
-
