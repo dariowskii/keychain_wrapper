@@ -11,6 +11,9 @@ do {
 } catch {
     // handle error
 }
+// ...
+// or without handling error
+let myPassword: String? = KeychainWrapper.shared.get(forKey: "myPasswordKey")
 ```
 
 You can `set` a new value for a specific key in this way:
@@ -28,6 +31,15 @@ You can `remove` a value for a specific key in this way:
 ```swift
 do {
     try KeychainWrapper.shared.remove(forKey: "myObjectKey")
+} catch {
+    // handle error
+}
+```
+
+You can remove all the stored values in this way:
+```swift
+do {
+    try KeychainWrapper.shared.deleteAll()
 } catch {
     // handle error
 }
