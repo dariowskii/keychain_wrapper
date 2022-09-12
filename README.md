@@ -45,6 +45,23 @@ do {
 }
 ```
 
+## KeychainItem
+
+You can also use the `KeychainItem` **propertyWrapper** to use the KeychainWrapper quickly and intuitively, in this way:
+```swift
+class SharedData {
+  static let shared = SharedData()
+  private init() {}
+  
+  @KeychainItem(key: .accessToken)
+  var accessToken: String?
+}
+
+// You can use it like normal variable
+let myAccessToken = SharedData.shared.accessToken
+SharedData.shared.accessToken = "mySecretToken"
+```
+
 ---
 
 Made with ❤️ from [dariowskii](https://www.linkedin.com/in/dario-varriale/)
